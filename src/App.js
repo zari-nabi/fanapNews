@@ -8,6 +8,7 @@ import Routes from './routes';
 import { NewsProvider, NewsContext } from "./contexts";
 import getNews from "./fakeJsons/getNews";
 import getUsers from "./fakeJsons/getUsers";
+import getPadNews from "./fakeJsons/getPadNews";
 import MasterPage from "./Layouts/Master/Master";
 
 const App = () => {
@@ -16,6 +17,7 @@ const App = () => {
   const [isLogedIn, setIsLogedIn] = useState(false);
   const [allNews, setAllNews] = useState([]);
   const [allUsers, setAllUsers] = useState([]);
+  const [padNews, setPadNews] = useState([]);
 
   const login = useCallback((userId) => {
     setIsLogedIn(true);
@@ -42,6 +44,7 @@ const App = () => {
   useEffect(() => {
     setAllNews(getNews.items);
     setAllUsers(getUsers.items);
+    setPadNews(getPadNews.items);
   }, []);
 
   const memoizedValue = useMemo(() => ({
@@ -54,9 +57,11 @@ const App = () => {
     allNews,
     setAllNews,
     login,
-    logout
+    logout,
+    padNews, 
+    setPadNews
   }),
-    [isLogedIn, userId, allNews, allUsers, login, logout]
+    [isLogedIn, userId, allNews, allUsers,padNews, login, logout]
   );
 
 
